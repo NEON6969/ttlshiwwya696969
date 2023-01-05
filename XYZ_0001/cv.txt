@@ -1,0 +1,138 @@
+import cv2
+from matplotlib import pyplot as plt
+import numpy as np
+
+IMAGE LOADING
+img = cv2.imread('Images/man.jpg')
+plt.imshow(img)
+plt.title('man')
+plt.axis('off')
+plt.show()
+
+GRAYSCALE
+img = cv2.imread('Images/man.jpg',0)
+plt.imshow(img, cmap = 'gray', interpolation = 'bicubic')
+plt.title('man')
+plt.axis('off')
+plt.show()
+
+BGR TO RGB
+img = cv2.imread('Images/man.jpg')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("man")
+plt.axis("off")
+plt.show()
+
+IMAGE SIZE(LENGHTH,BREADTH,CHANNEL)
+img = cv2.imread('Images/man.jpg')
+print(img.shape)
+
+MIN AND MAX PIXEL VALUE
+img = cv2.imread('Images/man.jpg')
+print (img.min())
+print (img.max())
+
+ACCESSING RGB PIXELS(access our pixels and find out what are the RGB value in a particular pixel)
+img = cv2.imread('Images/rgb.png')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title('RGB')
+plt.axis('on')
+plt.show()
+print(img.shape)
+[B,G,R] = img[100, 100]
+print('R=', R, 'G=', G, 'B=',B)
+
+SPLITTING COLOR CHANNEL(SUBPLOT)
+img = cv2.imread('Images/rgb.png')    
+
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB));plt.axis('off');plt.title('RGB')
+b = img[:,:,0]
+g = img[:,:,1]
+r = img[:,:,2]
+fig, bgr = plt.subplots(1,3)
+bgr[0].imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB));bgr[0].axis('off');bgr[0].set_title('blue');
+bgr[1].imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB));bgr[1].axis('off');bgr[1].set_title('green');
+bgr[2].imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB));bgr[2].axis('off');bgr[2].set_title('red');
+
+plt.show()
+
+CROPPING IMAGES(ROI)
+img = cv2.imread('Images/man.jpg')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title('man')
+plt.axis('on')
+plt.show()
+roi = img[1500:2500,1000:2000] 
+plt.imshow(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB))
+plt.title('man')
+plt.axis('off')
+plt.show()
+
+BLANKING FACE(BLUE)
+img = cv2.imread('Images/man.jpg')
+img[1500:2500,1000:2000] = [250,10,20] 
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title('man')
+plt.axis('on')
+plt.show()
+
+copy a part of the image and place it somewhere else
+
+img = cv2.imread('Images/man.jpg')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title('man')
+plt.axis('on')
+plt.show()
+
+img = cv2.imread('Images/man.jpg')
+jack = img[3500:3900, 1000:1500]
+plt.imshow(cv2.cvtColor(jack, cv2.COLOR_BGR2RGB))
+plt.title('jack')
+plt.axis('off')
+plt.show()
+
+PLACING COPIED IMG SOMEWHERE ELSE
+img = cv2.imread('Images/man.jpg')
+jack = img[3500:3900, 1000:1500]
+img[0:400,0:500]=img[400:800,500:1000]=img[800:1200,1000:1500]=jack
+
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title('more jacks')
+plt.axis('on')
+plt.show()
+
+
+RESIZING IMAGES
+Resizing images is important, especially when we want to train our model. When training a model, we want all our images to have the same size and aspect ratio.
+
+img = cv2.imread('Images/man.jpg')
+resized = cv2.resize(img, (200, 200))
+plt.imshow(cv2.cvtColor(resized, cv2.COLOR_BGR2RGB))
+plt.title('man')
+plt.axis('on')
+plt.show()
+print(resized.shape)
+
+img = cv2.imread('Images/man.jpg')
+resized=cv2.resize(img,(int(img.shape[1]/4),int(img.shape[0]/4)))
+plt.imshow(cv2.cvtColor(resized, cv2.COLOR_BGR2RGB))
+plt.title('man')
+plt.axis('off')
+plt.show()
+print(resized.shape)
+
+img = cv2.imread('Images/man.jpg') 
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title('man')
+plt.axis('off')
+plt.show()
+
+
+SAVING IMAGES
+cv2.imwrite('man.jpg',img)
+cv2.imwrite('resized_man.jpg',resized)
+
+
+
+
+
